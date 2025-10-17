@@ -1,0 +1,123 @@
+% !TeX root = ../Hauptdokument.tex
+% !TeX encoding = utf8
+% !TeX program = pdflatex
+
+% !TeX TXS-program:bibliography = txs:///biber
+
+% !TeX spellcheck = de_DE
+
+% !TeX TXS-SCRIPT = loadRoot
+% //Trigger = ?load-this-file
+% var filename = app.getCurrentFileName();
+% var rootFilename = editor.document().getMagicComment("root");
+%
+% app.load(app.getAbsoluteFilePath(rootFilename));
+% app.load(app.getAbsoluteFilePath(filename));
+% TXS-SCRIPT-END
+
+
+%---------------------------
+%   Standardbefehle für das Deckblatt
+%---------------------------
+\newcommand{\documenttitle}{Sawyer: Peg in a hole}
+\newcommand{\einreichungsdatum}{\today}
+
+\newcommand{\documentname}{Felix Schmidt B.Sc.}
+\newcommand{\documentmanr}{70472032}
+
+\newcommand{\secondDocumentname}{Lars Jany B.Sc.}
+\newcommand{\secondDocumentmanr}{70467805}
+
+\newcommand{\dozent}{Professor Dr.-Ing. Reinhard Gerndt}
+\newcommand{\secondDozent}{}
+
+\newcommand{\documentmodul}{Robotics/Cobotics}
+%---------------------------
+%   Ostfalia Standort Einstellung
+%---------------------------
+
+\newboolean{WF}
+\newboolean{SUD}
+\newboolean{WOB}
+\newboolean{SZ}
+\setboolean{WF}{true}
+\setboolean{SUD}{false}
+\setboolean{WOB}{false}
+\setboolean{SZ}{false}
+
+%---------------------------
+%   Zitieren und Referenzieren
+%---------------------------
+
+\NewDocumentCommand{\vollZitat}{m m}{\enquote{#1}(cf. \cite{#2})}
+\NewDocumentCommand{\sinnZitat}{m}{cf. \cite{#1}}
+\NewDocumentCommand{\abbRef}{m o o}{Fig. \ref{#1}\IfValueT{#2}{ and \ref{#2}}\IfValueT{#3}{ and \ref{#3}}}
+\NewDocumentCommand{\tabRef}{m o o}{Table \ref{#1}\IfValueT{#2}{ and \ref{#2}}\IfValueT{#3}{ and \ref{#3}}}
+
+%---------------------------
+%   Bilderverzeichnisse, Unterordner müssen separat angegeben werden.
+%---------------------------
+
+%{Bilder/}     Unterorder im Kapitelorder(deprecated)
+%{../Bilder/}  Bilderverzeichnis im Root.
+\graphicspath{{Bilder/}{../Bilder/}}
+
+%---------------------------
+%  Notizen Kategorien(optional)
+%  Beispiele für neue todo kategorien, kann weg da es nicht zum template gehört...
+%---------------------------
+
+%Requirements
+\NewDocumentCommand{\requ}{m}{\todo[color=blue!40,nolist]{#1}}
+
+%Kommentare
+\NewDocumentCommand{\note}{m}{\todo[inline,color=green!40]{\textbf{Notiz:} #1}}
+
+%Optionaler Text
+\NewDocumentCommand{\optional}{m}{\todo[inline,nolist,color=gray!40]{\textbf{Textschnipsel:} #1}}
+
+%Alter Text
+\NewDocumentCommand{\alt}{m}{\todo[inline,nolist,color=gray!40]{\textbf{ALT:} #1}}
+
+%Requirements
+\NewDocumentCommand{\pruefer}{m}{\todo[color=blue!40]{Frage: #1}}
+
+\NewDocumentCommand{\aufgabenbox}{m}{
+	\begin{tcolorbox}[colframe=blue!40, colback=gray!5, coltitle=black]
+		#1
+	\end{tcolorbox}
+}
+
+\NewDocumentCommand{\hinweisbox}{m}{
+	\begin{tcolorbox}[colframe=red!40, colback=gray!5, coltitle=black]
+		#1
+	\end{tcolorbox}
+}
+
+%---------------------------
+%   Signatur mit Ort, Datum und Unterschrift
+%---------------------------
+
+\newcommand*{\SignatureAndDate}[1]{
+	\par\noindent\makebox[52mm]{Wolfenbüttel, den \today}\vspace{-5mm}
+	\par\noindent\makebox[52mm]{\hrulefill}     \hfill\makebox[65mm]{\hrulefill}
+	\par\noindent\makebox[52mm][l]{Ort, Datum}	\hfill\makebox[62mm][l]{#1}
+}
+
+%---------------------------
+%   Definition des Kapitelformats
+%---------------------------
+
+\renewcommand{\chapterformat}{} % Entfernt "Kapitel X" über dem eigentlichen Kapitelnamen
+
+\NewDocumentCommand{\schritt}{m}{
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{c|c|c}
+			1 & 2 & 3 \\
+			#1
+		\end{tabular}
+	\end{table}
+}
+
+\newcommand{\blitz}{\textup{\Lightning} }

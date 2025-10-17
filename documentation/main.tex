@@ -1,0 +1,58 @@
+% !TeX document-id = {b65c6e28-2c6e-4ea6-a62b-0a632ed3f8c9}
+% !TeX root = Hauptdokument.tex
+% !TeX encoding = utf8
+% !TeX program = pdflatex
+
+% !TeX TXS-program:bibliography = txs:///biber
+
+% !TeX spellcheck = de_DE
+
+% !TeX TXS-SCRIPT = openroot
+% //Trigger = ?load-this-file
+% documentManager.setMasterDocument(documentManager.currentDocument);
+% TXS-SCRIPT-END
+
+% Autor : Bastian Schulten , erweitert von Falk Morgenstern
+
+% Dokumentenklasse
+\documentclass{scrbook}
+
+% Alle einstellungen für das Layout
+\input{Meta/header}
+% Language is set to English in header.tex
+% Datei für das Literaturverzeichnis
+\bibliography{literatur}
+
+% Neu Definierte Befehle
+\input{Meta/commands}
+
+% Silbentrennung
+\input{Meta/silbentrennung}
+
+% Beginn des Dokumentes
+\begin{document}
+
+\pagenumbering{Alph}
+%
+\listoftodos
+\input{Kapitel/00-deckblatt}
+
+\frontmatter
+
+\tableofcontents
+%\listoffigures % Abbildungsverzeichnis
+%\listoftables % Tabellenverzeichnis
+
+%\lstlistoflistings % Quellenverzeichnis
+
+\mainmatter
+
+\input{Kapitel/01-TaskDescription.tex}
+\input{Kapitel/02-Approach.tex}
+\input{Kapitel/03-Implemenation.tex}
+\input{Kapitel/04-Conclusion.tex}
+
+\printbibliography[title=Bibliography]
+
+\appendix
+\end{document}

@@ -1,0 +1,61 @@
+% Deckblatt
+
+\begin{titlepage}
+    \newgeometry{top=2cm, bottom=2.5cm, left=2.5cm, right=2cm}
+
+    
+    \definecolor{strich}{rgb}{0,.62,.89} % Informatik
+    \definecolor{text}{cmyk}{1,.55,0,.53} 
+    %\hfill
+    \begin{flushleft}
+    \includegraphics[scale=0.9]{Bilder/ostfalia_logo_left.png}\\
+    %\vspace{2em}
+    \color{strich} 
+    \hspace{24mm}\rule{70mm}{0.25mm}\\
+    \hspace{24mm}\Large
+    \textsf{Fakultät Informatik}
+    \end{flushleft}
+    
+    \begin{flushleft}
+         \vspace{3em}
+        {
+            \color{text}\fontsize{21}{20}{\textsf{\documenttitle}}}\\
+            \vspace{6em}
+            {\large\textsf{\textbf{\documentname}}}\\
+            {\small\textsf{Matrikel-Nr. \documentmanr}}\\
+            \ifdefempty{\secondDocumentname}{}{%
+                \vspace{2em}
+                {\large\textsf{\textbf{\secondDocumentname}}}\\
+                {\small\textsf{Matrikel-Nr. \secondDocumentmanr}}\\
+            }
+        \vspace{3em}
+        {\color{black}\large\textsf{Modul: \documentmodul\\
+        \ \\
+        %im Studiengang \documentstudiengang an der\\
+        Ostfalia Hochschule für angewandte Wissenschaften\\
+        – Hochschule Braunschweig/Wolfenbüttel\\
+        \color{strich}
+        \hrulefill\\
+        \ \\\color{black}
+        Dozent: \dozent \\
+        \ifdefempty{\secondDozent}{}{Dozent: \secondDozent\\}
+        \ \\
+        \ \\
+        Abgabedatum: \einreichungsdatum
+        }}
+        
+    \end{flushleft}
+    \begin{flushright}
+    %\vspace{14em}
+    \vfill
+    \color{text}\small\textsf{
+        \ifthenelse{\boolean{WF}}{Salzgitter $ \cdot $ Suderburg $ \cdot $ \textbf{Wolfenbüttel} $ \cdot $ Wolfsburg}{}
+        \ifthenelse{\boolean{SUD}}{Salzgitter $ \cdot $ \textbf{Suderburg} $ \cdot $ Wolfenbüttel $ \cdot $ Wolfsburg}{}
+        \ifthenelse{\boolean{SZ}}{{\textbf{Salzgitter}} $ \cdot $ Suderburg $ \cdot $ Wolfenbüttel $ \cdot $ Wolfsburg}{}
+        \ifthenelse{\boolean{WOB}}{Salzgitter $ \cdot $ Suderburg $ \cdot $ Wolfenbüttel $ \cdot $ {\textbf{Wolfsburg}}}{}
+    } 
+    \end{flushright}
+    
+\end{titlepage}
+
+\restoregeometry

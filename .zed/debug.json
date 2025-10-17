@@ -1,0 +1,14 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "adapter": "Debugpy",
+    "label": "Python Debugger: Current File with Arguments",
+    "request": "launch",
+    "program": "${ZED_WORKTREE_ROOT}/src/RSTemulator/__main__.py",
+    "console": "integratedTerminal",
+    "args": ["-asm", "testfiles/main.s", "--test-file", "testcases/example.py"]
+  }
+]

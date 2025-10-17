@@ -1,0 +1,336 @@
+% !TeX root = ../Hauptdokument.tex
+% !TeX encoding = utf8
+% !TeX program = pdflatex
+
+% !TeX TXS-program:bibliography = txs:///biber
+
+% !TeX spellcheck = de_DE
+
+% !TeX TXS-SCRIPT = loadRoot
+% //Trigger = ?load-this-file
+% var filename = app.getCurrentFileName();
+% var rootFilename = editor.document().getMagicComment("root");
+%
+% app.load(app.getAbsoluteFilePath(rootFilename));
+% app.load(app.getAbsoluteFilePath(filename));
+% TXS-SCRIPT-END
+
+
+%==========================
+% Genutzte Pakete
+%==========================
+\usepackage{scrhack}
+\usepackage[T1]{fontenc}            % Zeichencodierung
+\usepackage[utf8]{inputenc}         % Zeichencodierung
+\usepackage{lmodern}                % Schriftbildverbesserung
+\usepackage{microtype}
+% \usepackage[ngerman]{babel}         % Sprache Deutsch
+\usepackage[english]{babel}   % Sprache Englisch
+% \usepackage[english,ngerman]{babel}
+\usepackage[colorinlistoftodos, textsize=tiny,disable]{todonotes}            % ToDos  [disable] zum Ausschalten
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{graphicx}               % Grafiken
+\usepackage{geometry}               % Seitenränder
+\usepackage{chngcntr}               % Nummerierungen ohne Kapitelnummer
+\usepackage{setspace}               % Zeilenabstand
+\usepackage{scrlayer-scrpage}       % Kopf- und Fußzeilen
+\usepackage{xparse}                 % Definieren von Befehlen
+\usepackage{xspace}
+\usepackage{xstring}
+\usepackage{acronym} % Fuer Abkuerzungen
+\usepackage{multicol}
+\usepackage{ifthen}                 % If Abfragen
+\usepackage[titles]{tocloft}        % Inhaltsverzeichnis
+% (option titles sorgt für standard LaTeX Methode)
+\usepackage{longtable}              % Lange Tabellen
+\usepackage{csquotes}               % Für Anführungszeichen
+\usepackage{colortbl}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks]{hyperref}    % Links an Verweisen (hidelinks Links sind nicht umranden)
+\usepackage[most]{tcolorbox}        % Für schicke Boxen
+\usepackage{makecell}
+\usepackage{float}
+\usepackage{wasysym}
+\usepackage{marvosym}
+\usepackage{multirow}
+
+
+\usepackage{subcaption}
+
+\usepackage{varwidth}
+
+\usepackage[style=iso-numeric,  % Literaturverzeichnis
+	backend=bibtex,                 % Erzeuger des Literaturverzeichnis
+	natbib=true                     % natbib eingeschaltet
+]{biblatex}
+
+
+\usepackage{amsmath}				% Mathematische Formeln
+
+\usepackage{tikz}					% Graphen Erstellen
+\usetikzlibrary{shapes}             % B+-Trees
+\usetikzlibrary{arrows.meta, positioning} % Serialisierbarkeitsgraphen
+\usepackage{pgfplotstable}			% Erweiterung für Tabellen Import
+\usepackage{pgfplots}				% Erweiterung zum Plotten
+\pgfplotsset{compat=1.15}
+
+\usepgfplotslibrary{external} 		% Cachen von TIKZ Graphen
+
+
+\usepackage{eurosym}				% Euro zeichen
+
+\usepackage{enumitem}
+%\newlist{bulletdescription}{description}
+%\setlist[bulletdescription]{font=$\bullet$\scshape\bfseries}
+
+%==========================
+% Einstellungen (standard Konfigurationen)
+%==========================
+
+%--------------------------
+% Seitenlayout
+%--------------------------
+\geometry{a4paper}                  % A4 Blattgröße
+\geometry{twoside=false}            % Einseitiges Dokument (kein Buch)
+\geometry{top=2.5cm}                % oberer Seitenrand
+\geometry{bottom=2cm}               % unterer Seitenrand
+\geometry{left=3cm}                 % linker Seitenrand
+\geometry{right=2cm}                % rechter Seitenrand
+\geometry{bindingoffset=0cm}        % Bindekorrektur
+\geometry{includehead=true}         % Kopfzeile im Textkörper
+\geometry{includefoot=true}         % Fußzeile im Textkörper
+
+%--------------------------
+% Schriftgrößen
+%--------------------------
+\KOMAoption{fontsize}{11pt}                 % Schriftgröße
+\KOMAoption{headings}{big}
+%\addtokomafont{chapter}{\Large}            % Schriftgröße Kapitel
+%\addtokomafont{section}{\large}            % Schriftgröße Section
+%\addtokomafont{subsection}{\normalsize}    % Schriftgröße Subsection
+%\addtokomafont{subsubsection}{\normalsize} % Schriftgröße Subsubsection
+%\addtokomafont{paragraph}{\normalsize}     % Schriftgröße Paragraph
+%\addtokomafont{subparagraph}{\normalsize}  % Schriftgröße Suparagraph
+
+% Abstand vor paragraph und subparagraph
+\RedeclareSectionCommands[
+	beforeskip=-1ex
+]{paragraph,subparagraph}
+
+
+%--------------------------
+% Überschriften
+%--------------------------
+\KOMAoption{chapterprefix}{true}        % Prefix vor Kapiteln
+\KOMAoption{appendixprefix}{true}       % Prefix vor Kapiteln im Anhang
+
+%--------------------------
+% Zeilenabstände
+%--------------------------
+\onehalfspacing                        % Eineinhalbfacher Zeilenabstand
+
+%--------------------------
+% Inhaltsverzeichnis
+%--------------------------
+\KOMAoption{toc}{bibliography}  % Literaturverzeichnis im Inhaltsverzeichnis
+\KOMAoption{toc}{listof}        % Alle Verzeichnisse mit Eigenschaft totoc im
+% Inhaltsverzeichnis anzeigen (Abbildungsverzeichnis,
+% Tabellenverzeichnis)
+\setuptoc{toc}{totoc}           % Inhaltsverzeichnis bekommt eigenschaft totoc (wird demnach
+% auch im Inhaltsverzeichnis angezeigt)
+
+%--------------------------
+% Nummerierungen
+%--------------------------
+\KOMAoption{numbers}{noenddot}      % Keine Punkte nach den Nummerierungen
+\setcounter{secnumdepth}{3}         % Nummerierung bis zur subsubsection (3)
+
+%--------------------------
+% Captions
+%--------------------------
+\KOMAoption{captions}{oneline}           % Caption Zentriert
+\KOMAoption{captions}{figuresignature}   % Abbildungen als Unterschriften
+\KOMAoption{captions}{tablesignature}    % Tabellen als Unterschriften
+\addtokomafont{captionlabel}{\bfseries}  % Alle Captionlabels werden Fett
+
+%--------------------------
+% Abbildungsverzeichnis und Tabellenverzeichnis
+%--------------------------
+\KOMAoption{listof}{entryprefix}    % Prefix in Tabellen- und Abbildungsverzeichnis
+\setlength{\cfttabindent}{0em}      % Einfückung im Tabellenverzeichnis
+\setlength{\cftfigindent}{0em}      % Einrückung im Abbildungsverzeichnis
+
+%--------------------------
+% Absatzs
+%--------------------------
+\KOMAoption{parskip}{half}          % Absätze um halben Zeileanstand vergrößert
+
+%--------------------------
+% Kopfzeile und Fußzeile
+%--------------------------
+\automark[section]{chapter}         % chapter und sections sollen verfügbar sein.
+\KOMAoption{autooneside}{false}     % stellt ein das optionen von \automark eingesetzt werden.
+\KOMAoption{headsepline}{true}      % Trennlinie nach Kopfzeile
+\KOMAoption{footsepline}{true}      % Trennlinie vor Fußzeile
+\clearpairofpagestyles              % Kopfzeile und Fußzeile leeren
+\ihead{\leftmark}                   % Kopfzeile außen
+\chead{}                            % Kopfzeile mitte
+\ohead{}                            % Kopfzeile innen
+\ifoot{}                            % Fußzeile außen
+\cfoot{\pagemark}                   % Fußzeile mitte
+\ofoot{}                            % Fußzeile innen
+
+%--------------------------
+% Kopfzeile und Fußzeile für Seiten mit einem Kapitelanfang
+%--------------------------
+\newtriplepagestyle{chapterpagestyle}    % Neuen Style für Seiten mit Kapitelanfang definieren
+[0em]                        % Dicke der äußeren Linien
+[0.04em]                     % Dicke der inneren Linien
+{\rightmark}                 % Kopfzeile außen
+{}                           % Kopfzeile mitte
+{}                           % Kopfzeile innen
+{}                           % Fußzeile außen
+{\pagemark}                  % Fußzeile mitte
+{}                           % Fußzeile innen
+
+\renewcommand{\chapterpagestyle}{chapterpagestyle}
+
+
+
+%--------------------------
+% Schusterjungen und Hurenkinder
+%--------------------------
+\clubpenalty = 10000             % schließt Schusterjungen aus
+\widowpenalty = 10000            % schließt Hurenkinder aus (nur mit \displaywidowpenalty)
+\displaywidowpenalty = 10000     % schließt Hurenkinder aus (nur mit \widowpenalty)
+
+%--------------------------
+% Quelltexte
+%--------------------------
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+	belowskip=-0.5\baselineskip,
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{gray},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=SQL,                    % the language of the code
+	morekeywords={SHOW,DATABASE,DATABASES,SCHEMA,IF,LOCATION,COMMENT,WITH,DBPROPERTIES,TBLPROPERTIES,EXTENDED,CASCADE,USE,STRING,ARRAY,MAP,STRUCT,TABLES,RENAME,TO,PARTITION,COLUMNS,AFTER,REPLACE,ROW,FORMAT,DELIMITED,FIELDS,TERMINATED,BY,COLLECTION,ITEMS,TERMINATED,BY,MAP,KEYS,TERMINATED,BY,LINES,TERMINATED,BY,STORED,AS,TEXTFILE,SERDEPROPERTIES,PARTITIONED,INPATH,LOAD,DATA,OVERWRITE,DIRECTORY,create\_namespace,list\_namespace,alter\_namespace,describe\_namespace,drop\_namespace,create,list,describe,alter\_status,disable,alter,drop,put,delete,get,scan,DUPLICATE,UPSERT,CHANGE,BTREE,BIGINT,INFILE,ENCLOSED,SUM,AVG,exists,is\_disabled,is\_enabled},           % if you want to add more keywords to the set
+	sensitive=true,
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny,              % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{red},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+{€}{{\euro}}1 {£}{{\pounds}}1
+}
+
+
+%==========================
+% Einstellungen (durch Um-/Neudefinierung)
+%==========================
+
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
+
+
+%--------------------------
+% Abstand vor und nach der Kapitelüberschrift umdefinieren
+%--------------------------
+\renewcommand{\chapterheadstartvskip}{\vspace*{-0.5\baselineskip}}
+\renewcommand{\chapterheadmidvskip}{\par\nobreak\vspace*{0.25\baselineskip}}
+\renewcommand{\chapterheadendvskip}{\vspace*{1\baselineskip}}
+
+
+%--------------------------
+% Übersetzung für Abbildung und Tabelle wird geändert, damit in den Über-
+% und Unterschriften alle Tabellen und Abbildungen nur noch die Akürzungen
+% stehen
+%--------------------------
+\renewcaptionname{english}{\figurename}{Figure}
+\renewcaptionname{english}{\tablename}{Table}
+\renewcommand{\lstlistingname}{Code}
+\renewcommand{\lstlistlistingname}{List of Codes}
+
+
+%--------------------------
+% Abstände der Tabellen und Bildern im lot und lof zwischen Kapiteln entfernt
+%--------------------------
+\makeatletter
+\addtocontents{lof}{\protect\let\protect\addvspace\protect\@gobble}
+\addtocontents{lot}{\protect\let\protect\addvspace\protect\@gobble}
+\addtocontents{lol}{\protect\let\protect\addvspace\protect\@gobble}
+\makeatother
+
+
+%-------------------------
+% Fix lstlistoflistings problems
+%-------------------------
+\makeatletter
+\AtBeginDocument{%
+	\let\c@lstlisting\relax
+	\newlistof[chapter]{lstlisting}{lol}{\lstlistlistingname}
+	\renewcommand{\cftlstlistingnumwidth}{3em}
+}
+\makeatother
+
+
+
+
+%--------------------------
+% Erweiterung des Befehls \frontmatter
+% - Seitennummer
+%--------------------------
+\let\oldFrontmatter\frontmatter
+\renewcommand*{\frontmatter}{%
+	% Alte Definition
+	\oldFrontmatter
+	% Seitennummerierung mit großen römischen Zahlen
+	\pagenumbering{Roman}
+}
+
+%--------------------------
+% Tikz External Einstellungen
+%--------------------------
+
+\tikzexternalize[					% Unterordner vom Cache
+	prefix=TikzCache/
+]
+
+
+\tikzexternaldisable
+\newcommand{\inputtikz}[1]{
+	%\tikzexternalenable
+	%\tikzsetnextfilename{#1}
+	\includegraphics{#1.pdf}
+	%\tikzexternaldisable
+}
