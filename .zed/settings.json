@@ -1,7 +1,7 @@
 {
   "languages": {
     "Python": {
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": ["pyright", "ruff", "codebook"],
       "format_on_save": "on",
       "formatter": [
         {
@@ -10,6 +10,9 @@
           }
         }
       ]
+    },
+    "LaTeX": {
+      "language_servers": ["codebook"]
     }
   }
 }
